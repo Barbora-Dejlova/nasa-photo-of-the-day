@@ -1,32 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import Photo from './Photo.js'
-import axios from 'axios'
+import Photo from "./photo"
 
-function App() {
-  const[details, setDetails]=useState([])
-
-  useEffect(() => {
-    console.log("first render")
-    axios.get(`https://api.nasa.gov/planetary/apod?api_key=YYfkkOvLU3VDDJdN1RR50bvqIJiVJOCc0tOgYO5s`)
-    .then(response => {
-      setDetails(response.data)
-
-    })
-    .catch(error =>{
-      console.log(error)
-    })
-    
-  },[] )
-
-  return (
-
-    <div className="App">
-      {console.log(details)}
-      <Photo details  = {details} />
-      
+export default function App(){
+  return(
+    <div className="card">
+      <p><strong>NASA Pic of the Day</strong></p>
+      <Photo />
     </div>
-  );
+  )
 }
-
-export default App;

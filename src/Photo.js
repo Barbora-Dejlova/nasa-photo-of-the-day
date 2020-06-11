@@ -1,22 +1,49 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react';
+import "../App.css";
+import axios from 'axios';
+import { Card, CardTitle, CardText, CardImg, CardBody, Button } from 'reactstrap';
 
-export const Photo = (props) => {    
-        
-            const {details} =  props
+
+export default function Photo(props){
+
+    const [picture, setPic] = useState([]);
+    const [date, setDate] = useState("");
+
+    useEffect(() => {
+
+        axios
+
+        .get(`https://api.nasa.gov/planetary/apod?api_key=YYfkkOvLU3VDDJdN1RR50bvqIJiVJOCc0tOgYO5s&date=${date}`)
+
+        .then(response => {
+
+            console.log(response);
+
+            setPic(response.data);
+
+            setDate(response.data.date);
     
-    return(
-     
-    <div>
-        <h1>{details.title}</h1>      
-        <img src = {details.url}></img>
-        <p>{details.explanation}</p>
-        <p>{details.date}</p>
-        <p>copyright: {details.copyright}</p>
-    </div>
-  
-  
+        })
+        .catch(error => {
+
+            console.log("Error: ", error);
+
+        })
+
+    });
+
+    return (
+        <div className="photoContainer">
+            <Card>
+                <CardImg width="100%" src={picture.url} alt="NASA Pic of the Day" />
+                <CardBody>
+                    <CardTitle className="card">{picture.title}</CardTitle>
+                    <CardText className="card">{picture.explanation}</CardText>
+                    <CardText className="card">{picture.date}</CardText>
+                    <Button className="butt" href="https://apod.nasa.gov/apod/astropix.html">Original Post</Button>
+                </CardBody>
+            </Card>
+            
+        </div>
     )
-        
-    
 }
-export default Photo

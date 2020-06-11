@@ -2,6 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import "./Photo.js";
+import "./photo.js";
 
 ReactDOM.render(<App />, document.getElementById("root"));
