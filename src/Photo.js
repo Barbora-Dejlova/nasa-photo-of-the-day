@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import "../App.css";
+import "./App.css";
 import axios from 'axios';
 import { Card, CardTitle, CardText, CardImg, CardBody, Button } from 'reactstrap';
+import styled from 'styled-components'
 
 
 export default function Photo(props){
@@ -33,9 +34,9 @@ export default function Photo(props){
     });
 
     return (
-        <div className="photoContainer">
+        <Div className="photoContainer">
             <Card>
-                <CardImg width="100%" src={picture.url} alt="NASA Pic of the Day" />
+                <StyledImg width="100%" src={picture.url} alt="NASA Pic of the Day" />
                 <CardBody>
                     <CardTitle className="card">{picture.title}</CardTitle>
                     <CardText className="card">{picture.explanation}</CardText>
@@ -44,6 +45,34 @@ export default function Photo(props){
                 </CardBody>
             </Card>
             
-        </div>
+        </Div>
     )
 }
+
+
+
+const CardText = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: calc(50% - 20px);
+margin: 10px;
+border: 2px dashed white;
+border-radius: 6px;
+`
+const StyledImg = styled.img`
+display: block;
+object-fit: contain;
+width: 100%;
+height: 100%;
+padding: 10px 10px 0px 10px
+
+const Button = styled.button`
+  color: palevioletred;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+`;
